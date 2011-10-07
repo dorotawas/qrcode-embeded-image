@@ -129,12 +129,13 @@ public class QRCodeView extends FrameView {
         urlLabel.setText(resourceMap.getString("urlLabel.text")); // NOI18N
         urlLabel.setName("urlLabel"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(qrcode.QRCodeApp.class).getContext().getActionMap(QRCodeView.class, this);
+        generateButton.setAction(actionMap.get("generateQRCode")); // NOI18N
         generateButton.setText(resourceMap.getString("generateButton.text")); // NOI18N
         generateButton.setName("generateButton"); // NOI18N
 
         imageTextField.setName("imageTextField"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(qrcode.QRCodeApp.class).getContext().getActionMap(QRCodeView.class, this);
         imageButton.setAction(actionMap.get("BrowseForImage")); // NOI18N
         imageButton.setText(resourceMap.getString("imageButton.text")); // NOI18N
         imageButton.setName("imageButton"); // NOI18N
@@ -251,6 +252,18 @@ public class QRCodeView extends FrameView {
         chooser.setFileFilter(filter);
         chooser.showOpenDialog(chooser);
         imageTextField.setText(chooser.getSelectedFile().getName());
+    }
+
+    @Action
+    public void generateQRCode() {
+        Thread t = new Thread() {
+
+            public void run() {
+                    new ShowResultJFrame().setVisible(true);
+            }
+        };
+        t.start();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

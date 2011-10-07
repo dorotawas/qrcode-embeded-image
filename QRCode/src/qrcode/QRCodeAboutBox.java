@@ -1,6 +1,5 @@
 /*
  * QRCodeAboutBox.java
- * Mercurial lami
  */
 
 package qrcode;
