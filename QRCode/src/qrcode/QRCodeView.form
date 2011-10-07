@@ -70,9 +70,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="generateButton">
           <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="qrcode.QRCodeView" id="generateQRCode" methodName="generateQRCode"/>
-            </Property>
             <Property name="text" type="java.lang.String" resourceKey="generateButton.text"/>
             <Property name="name" type="java.lang.String" value="generateButton" noResource="true"/>
           </Properties>
