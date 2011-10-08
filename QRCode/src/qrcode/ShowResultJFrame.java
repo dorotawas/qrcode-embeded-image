@@ -10,7 +10,12 @@
  */
 package qrcode;
 
+import java.awt.BorderLayout;
+import java.awt.Panel;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -22,6 +27,10 @@ public class ShowResultJFrame extends javax.swing.JFrame {
     public ShowResultJFrame() {
         initComponents();
         this.setDefaultCloseOperation ( JFrame.DISPOSE_ON_CLOSE );
+    }
+    public void setImage(BufferedImage image) {
+        JLabel imgLabel = new JLabel(new ImageIcon(image));
+        add(imgLabel);
     }
 
     /** This method is called from within the constructor to

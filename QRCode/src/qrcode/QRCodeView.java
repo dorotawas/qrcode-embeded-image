@@ -4,6 +4,9 @@
 
 package qrcode;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -251,20 +254,17 @@ public class QRCodeView extends FrameView {
         FileFilter filter = new ImageFileFilter("Image", types);
         chooser.setFileFilter(filter);
         chooser.showOpenDialog(chooser);
-        imageTextField.setText(chooser.getSelectedFile().getName());
+        imageTextField.setText(chooser.getSelectedFile().getPath());
     }
 
     @Action
     public void generateQRCode() {
-        Thread t = new Thread() {
-
-            @Override
-            public void run() {
-                    new ShowResultJFrame().setVisible(true);
-            }
-        };
-        t.start();
-        
+        try {
+            Thread t = new ProcessRequest(imageTextField.getText(), urlTextField.getText());
+            t.start();
+        } catch (IOException ex) {
+            Logger.getLogger(QRCodeView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
