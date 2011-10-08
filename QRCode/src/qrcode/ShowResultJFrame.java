@@ -10,6 +10,8 @@
  */
 package qrcode;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author dorota
@@ -19,6 +21,7 @@ public class ShowResultJFrame extends javax.swing.JFrame {
     /** Creates new form ShowResultJFrame */
     public ShowResultJFrame() {
         initComponents();
+        this.setDefaultCloseOperation ( JFrame.DISPOSE_ON_CLOSE );
     }
 
     /** This method is called from within the constructor to
