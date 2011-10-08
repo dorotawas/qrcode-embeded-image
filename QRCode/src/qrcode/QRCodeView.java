@@ -258,6 +258,7 @@ public class QRCodeView extends FrameView {
     public void generateQRCode() {
         Thread t = new Thread() {
 
+            @Override
             public void run() {
                     new ShowResultJFrame().setVisible(true);
             }
