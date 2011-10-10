@@ -30,8 +30,9 @@ public class ShowResultJFrame extends javax.swing.JFrame {
     }
     public void setImage(BufferedImage image) {
         ImageJPanel imageJPanel = new ImageJPanel(image);
-        getContentPane().add(imageJPanel, 0); // at idx 0, at the top
-        this.getContentPane().repaint();
+        imageJPanel.setBounds(0, 0, 400, 260);
+        paintPanel.add(imageJPanel); // at idx 0, at the top
+        paintPanel.updateUI();
         System.out.println("setImage(image)");
     }
 
@@ -45,6 +46,7 @@ public class ShowResultJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         saveButton = new javax.swing.JButton();
+        paintPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -52,6 +54,19 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(qrcode.QRCodeApp.class).getContext().getResourceMap(ShowResultJFrame.class);
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
+
+        paintPanel.setName("paintPanel"); // NOI18N
+
+        javax.swing.GroupLayout paintPanelLayout = new javax.swing.GroupLayout(paintPanel);
+        paintPanel.setLayout(paintPanelLayout);
+        paintPanelLayout.setHorizontalGroup(
+            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        paintPanelLayout.setVerticalGroup(
+            paintPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,11 +76,13 @@ public class ShowResultJFrame extends javax.swing.JFrame {
                 .addContainerGap(321, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addContainerGap())
+            .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
+                .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(saveButton)
                 .addContainerGap())
         );
@@ -104,11 +121,12 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new ShowResultJFrame().setVisible(true);
+                //new ShowResultJFrame().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel paintPanel;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
