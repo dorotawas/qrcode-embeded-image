@@ -39,6 +39,7 @@ public class QRCodeApp extends SingleFrameApplication {
      * Main method launching the application.
      */
     public static void main(String[] args) {
+        QREmbedder.generate("LOLJAMNIK", 1, 1);
         launch(QRCodeApp.class, args);
     }
 }
