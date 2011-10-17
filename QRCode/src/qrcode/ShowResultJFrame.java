@@ -13,9 +13,16 @@ package qrcode;
 import java.awt.BorderLayout;
 import java.awt.Panel;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -23,12 +30,15 @@ import javax.swing.JLabel;
  */
 public class ShowResultJFrame extends javax.swing.JFrame {
 
+    BufferedImage image;
+
     /** Creates new form ShowResultJFrame */
     public ShowResultJFrame() {
         initComponents();
         this.setDefaultCloseOperation ( JFrame.DISPOSE_ON_CLOSE );
     }
     public void setImage(BufferedImage image) {
+        this.image = image;
         ImageJPanel imageJPanel = new ImageJPanel(image);
         imageJPanel.setBounds(0, 0, image.getWidth(), image.getHeight());
         this.setBounds(0, 0, image.getWidth()+10, image.getHeight()+50);
@@ -55,6 +65,11 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(qrcode.QRCodeApp.class).getContext().getResourceMap(ShowResultJFrame.class);
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         paintPanel.setName("paintPanel"); // NOI18N
 
@@ -90,6 +105,21 @@ public class ShowResultJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        String types[] = {"jpg", "gif", "png"};
+
+        FileFilter filter = new ImageFileFilter("Image", types);
+        chooser.setFileFilter(filter);
+        chooser.showSaveDialog(chooser);
+        System.out.println(chooser.getSelectedFile().getPath());
+        try {
+            ImageIO.write(image, "jpg", new File(chooser.getSelectedFile().getPath()));
+        } catch (IOException ex) {
+            Logger.getLogger(ShowResultJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
