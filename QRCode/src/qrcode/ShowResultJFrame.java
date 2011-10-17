@@ -30,7 +30,8 @@ public class ShowResultJFrame extends javax.swing.JFrame {
     }
     public void setImage(BufferedImage image) {
         ImageJPanel imageJPanel = new ImageJPanel(image);
-        imageJPanel.setBounds(0, 0, 400, 260);
+        imageJPanel.setBounds(0, 0, image.getWidth(), image.getHeight());
+        this.setBounds(0, 0, image.getWidth()+10, image.getHeight()+50);
         paintPanel.add(imageJPanel); // at idx 0, at the top
         paintPanel.updateUI();
         System.out.println("setImage(image)");
@@ -73,7 +74,7 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(321, Short.MAX_VALUE)
+                .addContainerGap(332, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addContainerGap())
             .addComponent(paintPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
