@@ -44,7 +44,6 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         this.setBounds(0, 0, image.getWidth()+10, image.getHeight()+80);
         paintPanel.add(imageJPanel); // at idx 0, at the top
         paintPanel.updateUI();
-        System.out.println("setImage(image)");
     }
 
     /** This method is called from within the constructor to
@@ -116,10 +115,10 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         System.out.println(chooser.getSelectedFile().getPath());
         try {
             ImageIO.write(image, "jpg", new File(chooser.getSelectedFile().getPath()));
+            dispose();
         } catch (IOException ex) {
             Logger.getLogger(ShowResultJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
