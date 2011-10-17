@@ -41,7 +41,7 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         this.image = image;
         ImageJPanel imageJPanel = new ImageJPanel(image);
         imageJPanel.setBounds(0, 0, image.getWidth(), image.getHeight());
-        this.setBounds(0, 0, image.getWidth()+10, image.getHeight()+50);
+        this.setBounds(0, 0, image.getWidth()+10, image.getHeight()+80);
         paintPanel.add(imageJPanel); // at idx 0, at the top
         paintPanel.updateUI();
         System.out.println("setImage(image)");
@@ -119,6 +119,7 @@ public class ShowResultJFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(ShowResultJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
