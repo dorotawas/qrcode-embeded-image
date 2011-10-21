@@ -20,6 +20,6 @@ public class ImageByteMatrix{
     }
 
     public BufferedImage toImage(int w, int h){
-        return new MyImage(this.toImage()).resizeTo(w, h);
+        return new MyImage(this.toImage()).resizeTo(w, h).toImage();
     }
 }

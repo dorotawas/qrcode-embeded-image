@@ -20,13 +20,13 @@ public class MyImage {
         this.image = image;
     }
 
-    public static BufferedImage load(File file) {
+    public MyImage load(File file) {
         BufferedImage image = null;
         try {
             image = ImageIO.read(file);
         } catch (IOException ex) { 
         }
-        return image;
+        return this;
     }
 
     public MyImage contrast() {
@@ -84,24 +84,26 @@ public class MyImage {
         return this;
     }
 
-    public BufferedImage resizeTo(int width, int height) {
+    public MyImage resizeTo(int width, int height) {
         BufferedImage resizedImage = new BufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = resizedImage.createGraphics();
         g.drawImage(this.image, 0, 0, width, height, null);
         g.dispose();
-        return resizedImage;
+        image = resizedImage;
+        return this;
     }
 
-    public BufferedImage grayscale(){
+    public MyImage grayscale(){
         BufferedImage gi = new BufferedImage(this.image.getWidth(), this.image.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
         gi.getGraphics().drawImage(this.image, 0, 0, null);
-        return gi;
+        image = gi;
+        return this;
     }
 
-    public BufferedImage drawImage(Image image, int x, int y){
+    public MyImage drawImage(Image image, int x, int y){
         this.image.getGraphics().drawImage(image, x, y, null);
-        return this.image;
+        return this;
     }
 
     public void save(File out){
