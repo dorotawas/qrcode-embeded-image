@@ -263,7 +263,9 @@ public class QRCodeView extends FrameView {
             Thread t = new ProcessRequest(imageTextField.getText(), urlTextField.getText());
             t.start();
         } catch (IOException ex) {
-            Logger.getLogger(QRCodeView.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(QRCodeView.class.getName()).log(Level.SEVERE, null, ex);
+            BadImageFrame badImageFrame = new BadImageFrame();
+            badImageFrame.setVisible(true);
         }
     }
 

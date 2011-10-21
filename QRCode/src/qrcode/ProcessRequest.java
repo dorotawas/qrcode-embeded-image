@@ -19,15 +19,15 @@ public class ProcessRequest extends Thread{
     public ProcessRequest(String imgPath, String URL) throws IOException {
         this.imgPath = imgPath;
         this.URL = URL;
-        image = ImageIO.read(new File(imgPath));
-        
+        image = ImageIO.read(new File(imgPath));        
     }
     @Override
     public void run() {
         ShowResultJFrame jFrame = new ShowResultJFrame();
         //jFrame.setImage(image);
         BufferedImage bi = QREmbedder.generate(URL, 400, 400);
-        jFrame.setImage(bi);
+        
+        jFrame.setImage(new MyImage(image).contrast().toImage());
         jFrame.setVisible(true);
     }
 
