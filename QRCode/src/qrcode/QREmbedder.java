@@ -41,25 +41,24 @@ public class QREmbedder {
         return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
     
-    public static BufferedImage tryEmbed(BufferedImage source, BufferedImage logo, int x, int y) {
+    public static BufferedImage tryEmbed(BufferedImage source, BufferedImage logo, int x, int y, int opacity) {
         BufferedImage copy = deepCopy(source);
-        //return logoMin;
-        return new MyImage(copy).drawImage(logo, x, y).toImage();
+        return new MyImage(copy).embedWithTransparency(logo, x, y, 100-opacity, opacity).toImage();
     }
     
-    public static BufferedImage embed(String url, BufferedImage logo){
+    public static BufferedImage embed(String url, BufferedImage logo, int contrast, int opacity){
         BufferedImage QR = new MyImage(new BufferedImage(Config.getWIDTH(), Config.getHEIGHT(), BufferedImage.TYPE_INT_RGB)).
                                 drawImage(generate(url, Config.getWIDTH(), Config.getHEIGHT()), 0, 0).toImage();
         Gaussian gw = new Gaussian(0, Config.getWIDTH()/Config.getDEVDIV());
         Gaussian gh = new Gaussian(0, Config.getHEIGHT()/Config.getDEVDIV());
         int w = QR.getWidth();
         int h = QR.getHeight();
-        for (int j = 3; j < 10; j++){
-            BufferedImage logoMin = new MyImage(logo).contrast(2).fitInto(2*w/j, 2*h/j).toImage();
+        for (int j = 2; j < 10; j++){
+            BufferedImage logoMin = new MyImage(logo).contrast(contrast).fitInto(2*w/j, 2*h/j).toImage();
             gw.setE(w/2 - w/j);
             gh.setE(h/2 - h/j);
             for (int i = 0; i < Config.getMAX_TRIES(); i++){                
-                BufferedImage e = tryEmbed(QR, logoMin, gw.getNext(), gh.getNext());
+                BufferedImage e = tryEmbed(QR, logoMin, gw.getNext(), gh.getNext(), opacity);
                 System.out.println(i);
                 if (check(e, url)) return e;             
             }
