@@ -83,6 +83,15 @@ public class MyImage {
         }
         return this;
     }
+    public MyImage fitInto(int width, int height) {
+        double divWidth = image.getWidth() / width;
+        double divHeight = image.getHeight() / height;
+        double min = Math.min(divHeight, divWidth);
+        min = Math.min(min, 1);
+        int newWidth = (int) Math.floor(image.getWidth()*min);
+        int newHeight = (int) Math.floor(image.getHeight()*min);
+        return this.resizeTo(newWidth, newHeight);
+    }
 
     public MyImage resizeTo(int width, int height) {
         BufferedImage resizedImage = new BufferedImage(width, height,
