@@ -11,7 +11,10 @@
 package qrcode;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.awt.Panel;
+import java.awt.ScrollPane;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +25,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.Scrollable;
 import javax.swing.filechooser.FileFilter;
 
 /**
