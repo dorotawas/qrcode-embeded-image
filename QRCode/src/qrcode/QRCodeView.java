@@ -137,6 +137,7 @@ public class QRCodeView extends FrameView {
         generateButton.setText(resourceMap.getString("generateButton.text")); // NOI18N
         generateButton.setName("generateButton"); // NOI18N
 
+        imageTextField.setText(resourceMap.getString("imageTextField.text")); // NOI18N
         imageTextField.setName("imageTextField"); // NOI18N
 
         imageButton.setAction(actionMap.get("BrowseForImage")); // NOI18N
@@ -160,10 +161,10 @@ public class QRCodeView extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                .addComponent(imageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                .addComponent(imageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(imageButton))
-                            .addComponent(urlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)))
+                            .addComponent(urlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
                     .addComponent(generateButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(30, 30, 30))
         );

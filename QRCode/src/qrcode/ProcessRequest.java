@@ -23,11 +23,8 @@ public class ProcessRequest extends Thread{
     }
     @Override
     public void run() {
-        ShowResultJFrame jFrame = new ShowResultJFrame();
-        //jFrame.setImage(image);
-        BufferedImage bi = QREmbedder.generate(URL, 400, 400);
-        
-        jFrame.setImage(new MyImage(image).contrast().toImage());
+        ShowResultJFrame jFrame = new ShowResultJFrame();        
+        jFrame.setImage(QREmbedder.embed(URL, image));
         jFrame.setVisible(true);
     }
 
