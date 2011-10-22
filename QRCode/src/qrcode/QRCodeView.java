@@ -229,7 +229,7 @@ public class QRCodeView extends FrameView {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(generateButton)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
