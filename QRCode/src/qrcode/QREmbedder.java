@@ -55,7 +55,7 @@ public class QREmbedder {
         int w = QR.getWidth();
         int h = QR.getHeight();
         for (int j = 3; j < 10; j++){
-            BufferedImage logoMin = new MyImage(logo).contrast().fitInto(2*w/j, 2*h/j).toImage();
+            BufferedImage logoMin = new MyImage(logo).contrast(2).fitInto(2*w/j, 2*h/j).toImage();
             gw.setE(w/2 - w/j);
             gh.setE(h/2 - h/j);
             for (int i = 0; i < Config.getMAX_TRIES(); i++){                
