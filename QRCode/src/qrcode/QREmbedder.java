@@ -50,15 +50,18 @@ public class QREmbedder {
     public static BufferedImage embed(String url, BufferedImage logo){
         BufferedImage QR = new MyImage(new BufferedImage(Config.getWIDTH(), Config.getHEIGHT(), BufferedImage.TYPE_INT_RGB)).
                                 drawImage(generate(url, Config.getWIDTH(), Config.getHEIGHT()), 0, 0).toImage();
-        Random R = new Random();
+        Gaussian gw = new Gaussian(0, Config.getWIDTH()/Config.getDEVDIV());
+        Gaussian gh = new Gaussian(0, Config.getHEIGHT()/Config.getDEVDIV());
         int w = QR.getWidth();
         int h = QR.getHeight();
-        for (int j = 2; j < 10; j++){
-            BufferedImage logoMin = new MyImage(logo).contrast().resizeTo(w/j, h/j).toImage();
-            for (int i = 0; i < Config.getMAX_TRIES(); i++){            
-                BufferedImage e = tryEmbed(QR, logoMin, R.nextInt(w/2), R.nextInt(h/2));
+        for (int j = 3; j < 10; j++){
+            BufferedImage logoMin = new MyImage(logo).contrast().fitInto(2*w/j, 2*h/j).toImage();
+            gw.setE(w/2 - w/j);
+            gh.setE(h/2 - h/j);
+            for (int i = 0; i < Config.getMAX_TRIES(); i++){                
+                BufferedImage e = tryEmbed(QR, logoMin, gw.getNext(), gh.getNext());
                 System.out.println(i);
-                if (check(e, url)) return e;            
+                if (check(e, url)) return e;             
             }
         }
         return QR;
