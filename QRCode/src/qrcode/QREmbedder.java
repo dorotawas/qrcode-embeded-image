@@ -59,7 +59,7 @@ public class QREmbedder {
             gh.setE(h/2 - h/j);
             for (int i = 0; i < Config.getMAX_TRIES(); i++){                
                 BufferedImage e = tryEmbed(QR, logoMin, gw.getNext(), gh.getNext(), opacity);
-                System.out.println(i);
+            //    System.out.println(i);
                 if (check(e, url)) return e;             
             }
         }

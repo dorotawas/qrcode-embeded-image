@@ -24,7 +24,7 @@ public class ProcessRequest extends Thread{
         this.contrast = contrast;
         this.opacity = opacity;
         image = ImageIO.read(new File(imgPath));        
-        System.out.println(contrast + " " + opacity);
+        
     }
     @Override
     public void run() {
