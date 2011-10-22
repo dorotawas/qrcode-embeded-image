@@ -54,7 +54,7 @@ public class MyImage {
     }
     
     public MyImage contrast(double power) {
-        power = Math.max(1, Math.log10(power/2));
+        power = Math.max(1 + power/100, Math.log10(power/2));
         int W = image.getWidth();
         int H = image.getHeight();
         int[][] smallerTab = new int[W][H];
