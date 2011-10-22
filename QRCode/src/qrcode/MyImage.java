@@ -52,7 +52,7 @@ public class MyImage {
         return this;
     }
     
-    public MyImage contrast() {
+    public MyImage contrast(double power) {
 
         int W = image.getWidth();
         int H = image.getHeight();
@@ -92,12 +92,12 @@ public class MyImage {
             for(int y=0; y<H; y++) {
                 if(smallerTab[x][y] > 0) {
                     for(int i=0; i<3; i++)
-                        colors[x][y][i] /=2;
+                        colors[x][y][i] = (int)((double) colors[x][y][i] / power);
                 }
                 else {
                     for(int i=0; i<3; i++) {
                         int dif = maxColor - colors[x][y][i];
-                        dif /= 2;
+                        dif = (int) ((double) dif / power);
                         colors[x][y][i] = maxColor - dif;
                     }
                 }
