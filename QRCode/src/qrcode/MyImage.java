@@ -33,6 +33,7 @@ public class MyImage {
         int maxColor = (1<<8)-1;
         for(int w=0; w<logo.getWidth(); w++)
             for(int h=0; h<logo.getHeight(); h++) {
+                if (w+x < 0 || h+y < 0 || w+x >= this.image.getWidth() || h+y >= this.image.getHeight()) continue;
                 int RGB = image.getRGB(x+w, y+h);
                 int logoRGB = logo.getRGB(w, h);
                 int[] colors = new int[3];
@@ -43,7 +44,7 @@ public class MyImage {
                     logoRGB = logoRGB >> 8;
                 }
                 int result = 0;
-                for(int i=2; i>=0; i++) {
+                for(int i=2; i>=0; i--) {
                     result = result << 8;
                     result += colors[i];
                 }
