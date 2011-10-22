@@ -84,8 +84,8 @@ public class MyImage {
         return this;
     }
     public MyImage fitInto(int width, int height) {
-        double divWidth = image.getWidth() / width;
-        double divHeight = image.getHeight() / height;
+        double divWidth = (double) width / image.getWidth();
+        double divHeight = (double) height / image.getHeight();
         double min = Math.min(divHeight, divWidth);
         min = Math.min(min, 1);
         int newWidth = (int) Math.floor(image.getWidth()*min);
