@@ -9,6 +9,9 @@ import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.awt.image.BufferedImage;
 import com.google.zxing.qrcode.encoder.*;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+import java.util.Random;
 
 public class QREmbedder {
     public static BufferedImage generate(String url, int w, int h){
@@ -29,5 +32,35 @@ public class QREmbedder {
             Result res = new QRCodeReader().decode(bitmap);
             return res.getText().equals(url);
         } catch (Exception ex){ return false; }
+    }
+    
+    public static BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
+    
+    public static BufferedImage tryEmbed(BufferedImage source, BufferedImage logo, int x, int y) {
+        BufferedImage copy = deepCopy(source);
+        //return logoMin;
+        return new MyImage(copy).drawImage(logo, x, y).toImage();
+    }
+    
+    public static BufferedImage embed(String url, BufferedImage logo){
+        BufferedImage QR = new MyImage(new BufferedImage(Config.getWIDTH(), Config.getHEIGHT(), BufferedImage.TYPE_INT_RGB)).
+                                drawImage(generate(url, Config.getWIDTH(), Config.getHEIGHT()), 0, 0).toImage();
+        Random R = new Random();
+        int w = QR.getWidth();
+        int h = QR.getHeight();
+        for (int j = 2; j < 10; j++){
+            BufferedImage logoMin = new MyImage(logo).contrast().resizeTo(w/j, h/j).toImage();
+            for (int i = 0; i < Config.getMAX_TRIES(); i++){            
+                BufferedImage e = tryEmbed(QR, logoMin, R.nextInt(w/2), R.nextInt(h/2));
+                System.out.println(i);
+                if (check(e, url)) return e;            
+            }
+        }
+        return QR;
     }
 }
