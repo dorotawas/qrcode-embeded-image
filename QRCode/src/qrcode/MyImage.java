@@ -28,7 +28,30 @@ public class MyImage {
         }
         return this;
     }
-
+    
+    public MyImage embedWithTransparency(BufferedImage logo, int x, int y, int originalWeight, int logoWeight) {
+        int maxColor = (1<<8)-1;
+        for(int w=0; w<logo.getWidth(); w++)
+            for(int h=0; h<logo.getHeight(); h++) {
+                int RGB = image.getRGB(x+w, y+h);
+                int logoRGB = logo.getRGB(w, h);
+                int[] colors = new int[3];
+                for(int i=0; i<3; i++) {
+                    colors[i] = (RGB & maxColor) * originalWeight + (logoRGB & maxColor) * logoWeight;
+                    colors[i] = (int) ((double) colors[i] / (originalWeight + logoWeight));
+                    RGB = RGB >> 8;
+                    logoRGB = logoRGB >> 8;
+                }
+                int result = 0;
+                for(int i=2; i>=0; i++) {
+                    result = result << 8;
+                    result += colors[i];
+                }
+                image.setRGB(x+w, y+h, result);
+            }
+        return this;
+    }
+    
     public MyImage contrast() {
 
         int W = image.getWidth();
