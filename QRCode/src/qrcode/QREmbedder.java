@@ -49,14 +49,16 @@ public class QREmbedder {
     public static BufferedImage embed(String url, BufferedImage logo, int contrast, int opacity){
         BufferedImage QR = new MyImage(new BufferedImage(Config.getWIDTH(), Config.getHEIGHT(), BufferedImage.TYPE_INT_RGB)).
                                 drawImage(generate(url, Config.getWIDTH(), Config.getHEIGHT()), 0, 0).toImage();
-        Gaussian gw = new Gaussian(0, Config.getWIDTH()/Config.getDEVDIV());
-        Gaussian gh = new Gaussian(0, Config.getHEIGHT()/Config.getDEVDIV());
+        Gaussian gw = new Gaussian(0, Config.getWIDTH()/Config.getDEVDIV(), Config.getWIDTH());
+        Gaussian gh = new Gaussian(0, Config.getHEIGHT()/Config.getDEVDIV(), Config.getHEIGHT());
         int w = QR.getWidth();
         int h = QR.getHeight();
         for (int j = 2; j < 10; j++){
             BufferedImage logoMin = new MyImage(logo).contrast(contrast).fitInto(2*w/j, 2*h/j).toImage();
             gw.setE(w/2 - w/j);
             gh.setE(h/2 - h/j);
+            gw.setMAX(Config.getWIDTH() - logoMin.getWidth());
+            gh.setMAX(Config.getHEIGHT() - logoMin.getHeight());
             for (int i = 0; i < Config.getMAX_TRIES(); i++){                
                 BufferedImage e = tryEmbed(QR, logoMin, gw.getNext(), gh.getNext(), opacity);
             //    System.out.println(i);
